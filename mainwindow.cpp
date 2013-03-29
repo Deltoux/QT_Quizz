@@ -29,6 +29,8 @@ void MaFenetre::lire() const
 
 MaFenetre::MaFenetre() : QWidget()
 {
+    this->setMinimumSize(500,500);
+
     int i=0;
     QString ligne;
     QString fileName = "C:/Users/Bertrand/Documents/QTiizz/Question/Q001.txt";
@@ -40,16 +42,14 @@ MaFenetre::MaFenetre() : QWidget()
             {
                 texte[i] = flux.readLine();
                 i++;
+                cout<<i<<endl;
                 //traitement de la ligne
             }
 
     m_LabQuest = new QLabel(this);
     m_string = new QString();
-    //m_string =
-    //m_LabQuest->setDisabled(1);
-    //cout<<ligne<<endl;
-    //m_LabQuest->setText(ligne);
-    //m_LineResp1 = new QLineEdit (this);
+    m_strBonneRep= new QString();
+    m_strMauvaiseRep= new QString();
 
     m_PushResp1=new QPushButton("&ligne",this);
     m_PushResp2=new QPushButton("Plip",this);
@@ -61,46 +61,117 @@ MaFenetre::MaFenetre() : QWidget()
     m_PushResp3->setText(texte[3]);
     m_PushResp4->setText(texte[4]);
 
-    m_GridQuest = new QGridLayout(this);
-    m_GridQuest->addWidget(m_LabQuest,1,0,1,2);
-    m_GridQuest->addWidget(m_PushResp1,2,0);
-    m_GridQuest->addWidget(m_PushResp2,2,1);
-    m_GridQuest->addWidget(m_PushResp3,3,0);
-    m_GridQuest->addWidget(m_PushResp4,3,1);
-    this->setLayout(m_GridQuest);
+    m_strBonneRep->append(texte[5]);
 
-    /*QObject::connect(m_sliderHor, SIGNAL(valueChanged(int)), this, SLOT(changerLargeur(int)));
-    QObject::connect(m_sliderVer, SIGNAL(valueChanged(int)), this, SLOT(changerLongueur(int)));
-    QObject::connect(this, SIGNAL(agrandissementMax()), qApp, SLOT(quit()));*/
-    //QObject::connect(m_PushResp1, SIGNAL(clicked()), this, SLOT(Reponse(1)));
-
-}
-
-/*void MaFenetre::Reponse()
-{
-
-}
-*/
-MonClasseur::MonClasseur(): QWidget()
-{
     m_onglets= new QTabWidget(this);
     m_onglets->setGeometry(30, 20, 400, 300);
 
     m_page1= new QWidget();
     m_page2= new QWidget();
     m_page3= new QWidget();
-    m_page4= new QWidget();
-    m_page5= new QWidget();
+    m_page4= new QLabel();
+    m_page5= new QLabel();
 
-    m_question=new MaFenetre();
-    QVBoxLayout *vbox3 = new QVBoxLayout;
-    vbox3->addWidget(m_question);
+    vbox3 = new QVBoxLayout;
+    vbox3->addWidget(m_LabQuest);
+    vbox3->addWidget(m_PushResp1);
+    vbox3->addWidget(m_PushResp2);
+    vbox3->addWidget(m_PushResp3);
+    vbox3->addWidget(m_PushResp4);
     m_page3->setLayout(vbox3);
+
+    m_page4->setPixmap(QPixmap("faux2.gif"));
+
+    m_page5->setPixmap(QPixmap("vrai.png"));
+
 
     m_onglets->addTab(m_page1, "Présentation");
     m_onglets->addTab(m_page2, "Choix Question");
     m_onglets->addTab(m_page3, "Question");
     m_onglets->addTab(m_page4, "Faux");
     m_onglets->addTab(m_page5, "Vrai");
-    //QObject::connect(, SIGNAL(clicked()), qApp, SLOT(quit()));
+
+    //m_onglets->setTabPosition(Tabposition);
+
+
+
+
+    //*QObject::connect(m_sliderHor, SIGNAL(valueChanged(int)), this, SLOT(changerLargeur(int)));
+    //QObject::connect(m_sliderVer, SIGNAL(valueChanged(int)), this, SLOT(changerLongueur(int)));
+    //QObject::connect(this, SIGNAL(agrandissementMax()), qApp, SLOT(quit()));
+    QObject::connect(m_PushResp1, SIGNAL(clicked()), this, SLOT(Reponse1()));
+    QObject::connect(m_PushResp2, SIGNAL(clicked()), this, SLOT(Reponse2()));
+    QObject::connect(m_PushResp3, SIGNAL(clicked()), this, SLOT(Reponse3()));
+    QObject::connect(m_PushResp4, SIGNAL(clicked()), this, SLOT(Reponse4()));
+
+}
+
+void MaFenetre::Reponse1()
+{
+    string str1 = m_strBonneRep->toStdString();
+    string str2 = "1";
+
+    if (str1.compare(str2) != 0)
+    {
+        cout <<"baaaaaaaaaaaaaaaah"<< endl;
+        //m_onglets->setTabPosition(4);
+    }
+    else
+    {
+        cout <<"Nice!!!!!!!!"<< endl;
+        //m_onglets->setTabPosition(5);
+    }
+
+}
+
+void MaFenetre::Reponse2()
+{
+    string str1 = m_strBonneRep->toStdString();
+    string str2 = "2";
+
+    if (str1.compare(str2) != 0)
+    {
+        cout <<"baaaaaaaaaaaaaaaah"<< endl;
+    }
+    else
+    {
+        cout <<"Nice!!!!!!!!"<< endl;
+    }
+}
+
+void MaFenetre::Reponse3()
+{
+    string str1 = m_strBonneRep->toStdString();
+    string str2 = "3";
+
+    if (str1.compare(str2) != 0)
+    {
+        cout <<"baaaaaaaaaaaaaaaah"<< endl;
+    }
+    else
+    {
+        cout <<"Nice!!!!!!!!"<< endl;
+    }
+}
+
+void MaFenetre::Reponse4()
+{
+    string str1 = m_strBonneRep->toStdString();
+    string str2 = "4";
+
+    if (str1.compare(str2) != 0)
+    {
+        cout <<"baaaaaaaaaaaaaaaah"<< endl;
+    }
+    else
+    {
+        cout <<"Nice!!!!!!!!"<< endl;
+    }
+}
+
+
+
+MonClasseur::MonClasseur(): QWidget()
+{
+
 }
