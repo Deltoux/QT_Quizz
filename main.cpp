@@ -5,7 +5,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MonClasseur wis;
+    MaFenetre wis;
     //w.lire();
     //return 0;
     wis.show();

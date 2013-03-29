@@ -1,0 +1,151 @@
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <QString>
+#include <QFile>
+#include <QTextStream>
+#include <QVector>
+
+using namespace std;
+
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MaFenetre::lire() const
+{
+}
+
+
+MaFenetre::MaFenetre() : QWidget()
+{
+    int i=0;
+    QString ligne;
+    QString fileName = "C:/Users/Bertrand/Documents/QTiizz/Question/Q001.txt";
+    QFile fichier(fileName);
+    fichier.open(QIODevice::ReadOnly | QIODevice::Text);
+    QTextStream flux(&fichier);
+    QVector <QString> texte(100);
+    while(! flux.atEnd())
+            {
+                texte[i] = flux.readLine();
+                i++;
+                //traitement de la ligne
+            }
+
+    m_LabQuest = new QLabel(this);
+    m_string = new QString();
+    //m_string =
+    //m_LabQuest->setDisabled(1);
+    //cout<<ligne<<endl;
+    //m_LabQuest->setText(ligne);
+    //m_LineResp1 = new QLineEdit (this);
+
+    m_PushResp1=new QPushButton("&ligne",this);
+    m_PushResp2=new QPushButton("Plip",this);
+    m_PushResp3=new QPushButton("Plup",this);
+    m_PushResp4=new QPushButton("Plep",this);
+
+    m_PushResp1->setText(texte[1]);
+    m_PushResp2->setText(texte[2]);
+    m_PushResp3->setText(texte[3]);
+    m_PushResp4->setText(texte[4]);
+
+    m_GridQuest = new QGridLayout(this);
+    m_GridQuest->addWidget(m_LabQuest,1,0,1,2);
+    m_GridQuest->addWidget(m_PushResp1,2,0);
+    m_GridQuest->addWidget(m_PushResp2,2,1);
+    m_GridQuest->addWidget(m_PushResp3,3,0);
+    m_GridQuest->addWidget(m_PushResp4,3,1);
+    this->setLayout(m_GridQuest);
+
+    /*QObject::connect(m_sliderHor, SIGNAL(valueChanged(int)), this, SLOT(changerLargeur(int)));
+    QObject::connect(m_sliderVer, SIGNAL(valueChanged(int)), this, SLOT(changerLongueur(int)));
+    QObject::connect(this, SIGNAL(agrandissementMax()), qApp, SLOT(quit()));*/
+    //QObject::connect(m_PushResp1, SIGNAL(clicked()), this, SLOT(Reponse(1)));
+
+}
+
+/*void MaFenetre::Reponse()
+{
+
+}
+*/
+MonClasseur::MonClasseur(): QWidget()
+{
+    int i=0;
+    QString ligne;
+    QString fileName = "C:/Users/Bertrand/Documents/QTiizz/Question/Q001.txt";
+    QFile fichier(fileName);
+    fichier.open(QIODevice::ReadOnly | QIODevice::Text);
+    QTextStream flux(&fichier);
+    QVector <QString> texte(100);
+    while(! flux.atEnd())
+            {
+                texte[i] = flux.readLine();
+                i++;
+                //traitement de la ligne
+            }
+
+    m_LabQuest = new QLabel(this);
+    m_string = new QString();
+    //m_string =
+    //m_LabQuest->setDisabled(1);
+    //cout<<ligne<<endl;
+    //m_LabQuest->setText(ligne);
+    //m_LineResp1 = new QLineEdit (this);
+
+    m_PushResp1=new QPushButton("&ligne",this);
+    m_PushResp2=new QPushButton("Plip",this);
+    m_PushResp3=new QPushButton("Plup",this);
+    m_PushResp4=new QPushButton("Plep",this);
+
+    m_PushResp1->setText(texte[1]);
+    m_PushResp2->setText(texte[2]);
+    m_PushResp3->setText(texte[3]);
+    m_PushResp4->setText(texte[4]);
+
+    m_GridQuest = new QGridLayout(this);
+    m_GridQuest->addWidget(m_LabQuest,1,0,1,2);
+    m_GridQuest->addWidget(m_PushResp1,2,0);
+    m_GridQuest->addWidget(m_PushResp2,2,1);
+    m_GridQuest->addWidget(m_PushResp3,3,0);
+    m_GridQuest->addWidget(m_PushResp4,3,1);
+    this->setLayout(m_GridQuest);
+
+    m_onglets= new QTabWidget(this);
+    m_onglets->setGeometry(30, 20, 400, 300);
+
+    m_page1= new QWidget();
+    m_page2= new QWidget();
+    m_page3= new QWidget();
+    m_page4= new QWidget();
+    m_page5= new QWidget();
+
+    QVBoxLayout *vbox3 = new QVBoxLayout;
+    vbox3->addWidget(m_GridQuest);
+    m_page3->setLayout(vbox3);
+
+    m_onglets->addTab(m_page1, "Présentation");
+    m_onglets->addTab(m_page2, "Choix Question");
+    m_onglets->addTab(m_page3, "Question");
+    m_onglets->addTab(m_page4, "Faux");
+    m_onglets->addTab(m_page5, "Vrai");
+
+    QObject::connect(m_PushResp1, SIGNAL(clicked()), m_onglets, SLOT(setCurrentIndex(1));
+    QObject::connect(m_PushResp2, SIGNAL(clicked()), m_onglets, SLOT(setCurrentIndex(1));
+    QObject::connect(m_PushResp3, SIGNAL(clicked()), qApp, SLOT(quit()));
+    QObject::connect(m_PushResp4, SIGNAL(clicked()), qApp, SLOT(quit()));
+
+
+}
