@@ -70,10 +70,12 @@ MaFenetre::MaFenetre() : QWidget()
 
     m_LineNomJoueur =new QLineEdit();
         m_LineNomJoueur->hide();
-        m_LabNombre = new QLabel("Combien de joueur?");
+    m_LabNombre = new QLabel("Combien de joueur?");
         m_LabNombre->hide();
-        m_etVosNoms = new QLabel("Et ton petit nom joueur 1");
+    m_etVosNoms = new QLabel("Et ton petit nom joueur 1");
         m_etVosNoms->hide();
+    m_PushValidNom =new QPushButton(this);
+        m_PushValidNom->hide();
     m_PushJoueur1=new QPushButton("1",this);
     m_PushJoueur2=new QPushButton("2",this);
     m_PushJoueur3=new QPushButton("3",this);
@@ -95,8 +97,9 @@ MaFenetre::MaFenetre() : QWidget()
     vbox1->addWidget(m_PushJoueur1,2,0);
     vbox1->addWidget(m_PushJoueur2,2,1);
     vbox1->addWidget(m_PushJoueur3,2,2);
-    vbox1->addWidget(m_LineNomJoueur,2,1,1,2);
+    vbox1->addWidget(m_LineNomJoueur,2,1,1,1);
     vbox1->addWidget(m_etVosNoms,2,0);
+    vbox1->addWidget(m_PushValidNom,2,2);
     m_page1->setLayout(vbox1);
 
     vbox2 = new QGridLayout;
@@ -138,9 +141,12 @@ MaFenetre::MaFenetre() : QWidget()
     QObject::connect(m_PushResp4, SIGNAL(clicked()), this, SLOT(Reponse4()));
 
     QObject::connect(m_PushJoueur1, SIGNAL(clicked()), this, SLOT(unJoueur()));
-    QObject::connect(m_PushJoueur1, SIGNAL(clicked()), this, SLOT(deuxJoueur()));
-    QObject::connect(m_PushJoueur1, SIGNAL(clicked()), this, SLOT(troisJoueur()));
+    QObject::connect(m_PushJoueur2, SIGNAL(clicked()), this, SLOT(deuxJoueur()));
+    QObject::connect(m_PushJoueur3, SIGNAL(clicked()), this, SLOT(troisJoueur()));
 
+    QObject::connect(m_PushValidNom, SIGNAL(clicked()), this, SLOT(troisJoueur()));
+
+    //string Joueur
 }
 
 void MaFenetre::Reponse1()
@@ -238,21 +244,24 @@ void MaFenetre::BackQuestion()
 void MaFenetre::unJoueur()
 {
     m_nombreDeJoueur=1;
-    Joueur joueurUn;
+
     MaFenetre::initialiseJoueur();
+    //joueurUn.changerNom(joueurUn,"Albert");
+
 }
 
 void MaFenetre::deuxJoueur()
 {
     m_nombreDeJoueur=2;
-    Joueur joueurUn,joueurDeux;
+    //Joueur joueurUn,joueurDeux;
     MaFenetre::initialiseJoueur();
+
 }
 
 void MaFenetre::troisJoueur()
 {
     m_nombreDeJoueur=3;
-    Joueur joueurUn,joueurDeux,joueurTrois;
+    //Joueur joueurUn,joueurDeux,joueurTrois;
     MaFenetre::initialiseJoueur();
 
 }
@@ -269,10 +278,15 @@ void MaFenetre::initialiseJoueur()
         m_LineNomJoueur->show();
         m_LineNomJoueur->clear();
         m_etVosNoms->show();
+        m_PushValidNom->show();
 
     }
 }
 
+void MaFenetre::nommerJoueur()
+{
+
+}
 
 MonClasseur::MonClasseur(): QWidget()
 {
@@ -284,14 +298,20 @@ MonClasseur::MonClasseur(): QWidget()
 
   Joueur::Joueur()
 {
-    m_vie = new QString;
+    m_nom = new QString;
     m_score=0;
     m_bonusUn=TRUE;
     m_bonusDeux=TRUE;
-
 }
 
   void Joueur::changerScore(int argent)
   {
       this->m_score =+ argent;
+  }
+
+  void Joueur::changerNom(Joueur &cible,QString nom)
+  {
+      cible.m_nom->clear();
+      cible.m_nom->append(nom);
+      cout<<m_nom<<endl;
   }
