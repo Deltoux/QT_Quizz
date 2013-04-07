@@ -52,6 +52,7 @@ class MaFenetre : public QWidget
     static void msleep(unsigned long msecs){QThread::msleep(msecs);}
     static void sleep(unsigned long secs){QThread::sleep(secs);}
 
+
     public slots:
 
     void unJoueur();
@@ -64,6 +65,7 @@ class MaFenetre : public QWidget
     void Reponse4();
     void BackQuestion();
 
+    void nommerJoueur();
 
 
     signals:
@@ -99,7 +101,8 @@ class MaFenetre : public QWidget
                 *m_PushChoix3,
                 *m_PushJoueur1,
                 *m_PushJoueur2,
-                *m_PushJoueur3;
+                *m_PushJoueur3,
+                *m_PushValidNom;
 
     QLineEdit   *m_LineResp1,
                 *m_LineResp2,
@@ -118,6 +121,8 @@ class MaFenetre : public QWidget
                 *vbox3,
                 *vbox4,
                 *vbox5;
+
+
 };
 
 class Joueur
@@ -126,9 +131,10 @@ class Joueur
     Joueur();
 
     void changerScore(int argent);
+    void changerNom( Joueur &cible,QString nom);
 
     protected:
-    QString *m_vie;
+    QString *m_nom;
     int m_score;
     bool m_bonusUn,m_bonusDeux;
 
