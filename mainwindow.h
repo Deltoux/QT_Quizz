@@ -14,7 +14,6 @@
 #include <QTabWidget>
 #include <QApplication>
 #include <QtGui>
-#include <QThread>
 
 namespace Ui {
 class MainWindow;
@@ -40,6 +39,8 @@ private:
     QGridLayout *m_GridQuest;
 };
 
+
+
 class MaFenetre : public QWidget
 {
     Q_OBJECT
@@ -47,24 +48,13 @@ class MaFenetre : public QWidget
     public:
     MaFenetre();
     void lire() const;
-    void initialiseJoueur();
-    static void usleep(unsigned long usecs){QThread::usleep(usecs);}
-    static void msleep(unsigned long msecs){QThread::msleep(msecs);}
-    static void sleep(unsigned long secs){QThread::sleep(secs);}
 
     public slots:
-
-    void unJoueur();
-    void deuxJoueur();
-    void troisJoueur();
 
     void Reponse1();
     void Reponse2();
     void Reponse3();
     void Reponse4();
-    void BackQuestion();
-
-
 
     signals:
 
@@ -72,65 +62,23 @@ class MaFenetre : public QWidget
 
     protected:
 
-    static int nombreDeJoueur;
-
-    int m_nombreDeJoueur;
-
-    QWidget *m_page1,
-            *m_page2,
-            *m_page3,
-            *m_page5;
-
-    QLabel  *m_page4,
-            *m_LabNombre,
-            *m_etVosNoms;
+    QWidget *m_page1,*m_page2,*m_page3;
+    QLabel *m_page4,*m_page5;
 
     QTabWidget *m_onglets;
 
     QSlider *m_sliderVer,*m_sliderHor;
-    //QGridLayout *layout;
+    QGridLayout *layout = new QGridLayout;
     QLabel *m_LabQuest,*m_LabVrai,*m_LabFaux;
-    QPushButton *m_PushResp1,
-                *m_PushResp2,
-                *m_PushResp3,
-                *m_PushResp4,
-                *m_PushChoix1,
-                *m_PushChoix2,
-                *m_PushChoix3,
-                *m_PushJoueur1,
-                *m_PushJoueur2,
-                *m_PushJoueur3;
-
-    QLineEdit   *m_LineResp1,
-                *m_LineResp2,
-                *m_LineResp3,
-                *m_LineResp4,
-                *m_LineNomJoueur;
-
+    QPushButton *m_PushResp1,*m_PushResp2,*m_PushResp3,*m_PushResp4;
+    QLineEdit *m_LineResp1, *m_LineResp2, *m_LineResp3, *m_LineResp4;
     QGridLayout *m_GridQuest;
-
-    QString     *m_string,
-                *m_strBonneRep,
-                *m_strMauvaiseRep;
-
-    QGridLayout *vbox1,
-                *vbox2,
-                *vbox3,
+    QString *m_string,
+            *m_strBonneRep,
+            *m_strMauvaiseRep;
+    QVBoxLayout *vbox3,
                 *vbox4,
                 *vbox5;
-};
-
-class Joueur
-{
-    public:
-    Joueur();
-
-    void changerScore(int argent);
-
-    protected:
-    QString *m_vie;
-    int m_score;
-    bool m_bonusUn,m_bonusDeux;
 
 };
 
